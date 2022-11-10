@@ -1,17 +1,29 @@
 import type { NextPage } from 'next';
 import Head from 'next/head';
-import Image from 'next/image';
-import Header from '../components/Header';
+import Feed from '../components/Feed';
+import PostBox from '../components/PostBox';
+import { useQuery } from 'react-query';
 
 const Home: NextPage = () => {
+  const { isLoading, error, data } = useQuery(
+    'posts',
+    () => fetch('https://www.reddit.com/r/all.json').then((res) => res.json()),
+    {
+      select: (data) => data.data.children.map((post) => post.data),
+    },
+  );
+
+  if (isLoading) {
+    return <div>Loading...</div>;
+  }
   return (
-    <div className="">
+    <div className="max-w-2xl mx-auto">
       <Head>
         <title>Reddit-ish</title>
         <link rel="icon" href="/favicon.ico" />
       </Head>
-
-      <Header />
+      <PostBox />
+      <Feed posts={data} />
     </div>
   );
 };

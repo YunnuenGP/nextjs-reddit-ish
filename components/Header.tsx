@@ -18,7 +18,7 @@ import {
 
 function Header() {
   return (
-    <div className="flex bg-white px-4 py-2 shadow-sm">
+    <div className="sticky top-0 z-50 flex bg-white px-4 py-2 shadow-sm">
       {/* Logo */}
       <div className="relative h-10 w-20 flex-shrink-0 cursor-pointer">
         <Image
@@ -26,6 +26,10 @@ function Header() {
           alt="logo"
           style={{ objectFit: 'contain' }}
           fill
+          sizes="(max-width: 768px) 100vw,
+              (max-width: 1200px) 50vw,
+              33vw"
+          priority
         />
       </div>
 
