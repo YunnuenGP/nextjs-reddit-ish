@@ -9,7 +9,7 @@ const Home: NextPage = () => {
     'posts',
     () => fetch('https://www.reddit.com/r/all.json').then((res) => res.json()),
     {
-      select: (data) => data.data.children.map((post) => post.data),
+      select: (data) => data.data.children.map((post: any) => post.data),
     },
   );
 
@@ -29,4 +29,3 @@ const Home: NextPage = () => {
 };
 
 export default Home;
-

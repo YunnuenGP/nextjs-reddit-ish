@@ -4,15 +4,18 @@ import CommentBox from '../../components/CommentBox';
 import Comments from '../../components/Comments';
 import { useQuery } from 'react-query';
 
-function PostPage({ postURL }) {
+interface PostPage {
+  postURL: string;
+}
+function PostPage({ postURL }: PostPage) {
   const { isLoading, error, data } = useQuery(
     'posts',
     () => fetch(`https://www.reddit.com${postURL}.json`).then((res) => res.json()),
     {
       select: React.useCallback(
-        (data) => ({
+        (data: any) => ({
           post: data[0].data.children[0].data,
-          comments: data[1].data.children.map((child) => child.data),
+          comments: data[1].data.children.map((child: any) => child.data),
         }),
         [],
       ),
