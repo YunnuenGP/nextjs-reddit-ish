@@ -14,7 +14,7 @@ function PostPage({ postURL }: PostPage) {
     {
       select: React.useCallback(
         (data: any) => ({
-          post: data[0].data.children[0].data,
+          post: data[0]?.data?.children[0]?.data,
           comments: data[1].data.children.map((child: any) => child.data),
         }),
         [],

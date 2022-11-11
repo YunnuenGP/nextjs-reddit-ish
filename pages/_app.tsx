@@ -1,22 +1,23 @@
 import '../styles/globals.css';
+import * as React from 'react';
 import type { AppProps } from 'next/app';
+import { QueryClient, QueryClientProvider, Hydrate } from 'react-query';
 import { Toaster } from 'react-hot-toast';
 import Header from '../components/Header';
-import { QueryClient, QueryClientProvider } from 'react-query';
-
-const queryClient = new QueryClient();
 
 function MyApp({ Component, pageProps }: AppProps) {
+  const [queryClient] = React.useState(() => new QueryClient());
   return (
     <QueryClientProvider client={queryClient}>
       <Toaster />
       <div className="h-screen overflow-y-scroll bg-slate-200">
         <Header />
-        <Component {...pageProps} />
+        <Hydrate state={pageProps.dehydratedState}>
+          <Component {...pageProps} />
+        </Hydrate>
       </div>
     </QueryClientProvider>
   );
 }
 
 export default MyApp;
-

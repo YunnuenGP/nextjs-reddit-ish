@@ -15,6 +15,7 @@ import {
   SpeakerWaveIcon,
   VideoCameraIcon,
 } from '@heroicons/react/24/outline';
+import Link from 'next/link';
 
 function Header() {
   return (
@@ -35,7 +36,9 @@ function Header() {
 
       {/* Home */}
       <div className="flex items-center mx-7 cursor-pointer xl:min-w-[300px]">
-        <HomeIcon className="h-5 w-5" />
+        <Link href={'/'}>
+          <HomeIcon className="h-5 w-5" />
+        </Link>
         <p className="flex-1 ml-2 hidden lg:inline">Home</p>
         <ChevronDownIcon className="h-5 w-5" />
       </div>
