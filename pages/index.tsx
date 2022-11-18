@@ -1,10 +1,9 @@
 import type { NextPage } from 'next';
 import Head from 'next/head';
+import { dehydrate, QueryClient, useQuery } from 'react-query';
 import Feed from '../components/Feed';
 import PostBox from '../components/PostBox';
-import { dehydrate, QueryClient, useQuery } from 'react-query';
-
-const fetchPosts = async () => fetch('https://www.reddit.com/r/all.json').then((res) => res.json());
+import { fetchPosts } from '../api/posts';
 
 export async function getStaticProps() {
   const queryClient = new QueryClient();
@@ -18,14 +17,12 @@ export async function getStaticProps() {
   };
 }
 
+// const _fetchPost = () => fetch("https://www.reddit.com/r/all.json").then(res => res.json());
+
 const Home: NextPage = () => {
-  const { isLoading, data } = useQuery('posts', fetchPosts, {
+  const { data } = useQuery('posts', fetchPosts, {
     select: (data) => data.data.children.map((post: any) => post.data),
   });
-
-  if (isLoading) {
-    return <div>Loading...</div>;
-  }
 
   console.log('Home', data);
 

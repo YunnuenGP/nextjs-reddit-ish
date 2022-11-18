@@ -15,10 +15,10 @@ function Feed({ posts }: FeedProps) {
           href={{
             pathname: 'post/[id]',
             query: {
+              id: post.id,
               url: post.permalink,
             },
           }}
-          as={`post/${post.permalink.replaceAll('/', '-')}`}
         >
           <Post post={post} />
         </Link>

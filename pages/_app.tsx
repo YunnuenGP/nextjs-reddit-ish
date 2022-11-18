@@ -3,7 +3,7 @@ import * as React from 'react';
 import type { AppProps } from 'next/app';
 import { QueryClient, QueryClientProvider, Hydrate } from 'react-query';
 import { Toaster } from 'react-hot-toast';
-import Header from '../components/Header';
+import Header from '../components/header/';
 
 function MyApp({ Component, pageProps }: AppProps) {
   const [queryClient] = React.useState(() => new QueryClient());

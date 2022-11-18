@@ -17,7 +17,7 @@ interface Comment {
 }
 
 function Comment(comment: Comment) {
-  if (!comment.body) return null;
+  if (!comment?.body) return null;
 
   const children = comment.replies?.data?.children;
   const date = new Date();
@@ -36,7 +36,7 @@ function Comment(comment: Comment) {
             <span className="font-semibold text-gray-600">{comment.author + ' '}</span>
             <TimeAgo date={date} />
           </p>
-          <p className="break-all md:break-normal">{comment.body}</p>
+          <p className="break-all">{comment.body}</p>
         </div>
       </div>
 

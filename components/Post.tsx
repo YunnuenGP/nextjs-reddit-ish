@@ -30,22 +30,21 @@ interface PostProps {
   children?: React.ReactNode;
 }
 
-function Post({ post, children }: PostProps) {
-  const date = new Date();
-  date.setTime(Number(post.created) * 1000);
+const formatter = Intl.NumberFormat('en-US', {
+  notation: 'compact',
+});
 
-  const formatter = Intl.NumberFormat('en', {
-    notation: 'compact',
-    minimumFractionDigits: 1,
-    maximumFractionDigits: 1,
-  });
+function Post({ post, children }: PostProps) {
+  const date = new Date(Number(post.created) * 1000).toISOString();
+
+  const score = formatter.format(post.score);
 
   return (
     <div className="flex rounded-md border border-gray-300 bg-white shadow-sm hover:border-gray-600">
       {/* Votes */}
       <div className="flex flex-col items-center justify-start py-2 px-1 space-y-1 rounded-l-md bg-gray-50 text-gray-400">
         <ArrowUpIcon className="voteButtons hover:text-red-400" />
-        <p className="text-black text-xs font-bold">{formatter.format(post.score)}</p>
+        <p className="text-black text-xs font-bold">{score}</p>
         <ArrowDownIcon className="voteButtons hover:text-blue-400" />
       </div>
 
@@ -63,8 +62,8 @@ function Post({ post, children }: PostProps) {
 
         {/* Body */}
         <div className="py-4">
-          <h2 className="text-xl font-semibold">{post.title}</h2>
-          <p className="mt-2 text-sm font-light">{post.selftext}</p>
+          <h2 className="text-xl font-semibold break-all">{post.title}</h2>
+          <p className="mt-2 text-sm font-light breal-all">{post.selftext}</p>
         </div>
 
         {/* Image */}
@@ -72,7 +71,7 @@ function Post({ post, children }: PostProps) {
           <img className="w-full" src={post.url} alt="Post Image" />
         ) : (
           <div>
-            <p>{`${post.post_hint}: ${post.url}`}</p>
+            <p className="mt-2 text-sm font-semibold break-all">{`${post.post_hint}: ${post.url}`}</p>
           </div>
         )}
 
