@@ -1,0 +1,3 @@
+interface Customizable {
+    className?: string;
+}
